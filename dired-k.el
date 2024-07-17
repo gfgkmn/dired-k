@@ -199,9 +199,10 @@
 
 (defsubst dired-k--git-style-char (stat)
   (cl-case stat
-    (modified (propertize "M " 'face 'dired-k-modified))
-    (added (propertize "A " 'face 'dired-k-added))
+    (modified (propertize "**" 'face 'dired-k-modified))
+    (added (propertize "++" 'face 'dired-k-added))
     (untracked (propertize "??" 'face 'dired-k-untracked))
+    (ignored (propertize "!!" 'face 'dired-k-ignored))
     (otherwise "  ")))
 
 (defun dired-k--pad-spaces (str)
@@ -337,7 +338,7 @@
   (when revert
     (revert-buffer nil t))
   (save-excursion
-    (dired-k--highlight-by-file-attribyte)
+    ;; (dired-k--highlight-by-file-attribyte)
     (when (dired-k--inside-git-repository-p)
       (let ((root (dired-k--root-directory)))
         (when root
